@@ -1,0 +1,241 @@
+
+Secondbaseclass
+
+
+package org.secondbase;
+
+import java.time.Duration;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class SecondBase {
+	
+	//access driver for anywhere
+	
+	public static WebDriver driver;
+	
+	public static void chromelaunch() {
+		
+		
+		//chrome setup
+		
+		WebDriverManager.chromedriver().setup();
+
+       //open chrome
+
+        driver=new ChromeDriver();
+		
+		
+	}
+	
+	public static void urllaunch(String url) {
+		
+	      //get url
+	
+		  driver.get(url);
+		
+	}
+	
+	
+	public static void impwait(int sec) {
+		
+		//quick access or timing
+		
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
+		//maximize
+		
+		
+		driver.manage().window().maximize();
+
+	}
+	
+	public static void webelement() {
+		
+		
+		//search element in webpage
+		
+		driver.findElement(By.id(""));
+		
+		driver.findElement(By.name(""));
+		
+		driver.findElement(By.className(""));
+		
+		driver.findElement(By.xpath(""));
+	
+
+	}
+	
+	//sendkeys
+	
+	public static void sendkeys(WebElement e,String data) {
+		
+		
+		e.sendKeys(data);
+		
+		
+}
+	//click
+	
+	public static void click(WebElement e) {
+		
+		
+		e.click();
+		
+		}
+	
+	
+	//gettitle
+	
+	
+	public static String gettiltle() {
+		
+		String t=driver.getTitle();
+		
+		return t;
+		
+		}
+	
+	//get the value from webelement
+	
+	public static String getattribute (WebElement e) {
+		
+		String c=e.getAttribute("value");
+		
+		return c;
+		
+
+	}
+	
+	//all quit
+	
+	public static void quit() {
+		
+		
+		driver.quit();
+
+	}
+	
+	
+	//draganddrop
+	
+	public static void draganddrop(WebElement from,WebElement to) {
+		
+		Actions a=new Actions(driver);
+		
+		a.dragAndDrop(from, to).perform();
+		
+ 
+		
+	}
+	
+	//alert
+	
+	
+	public static void simplealert() {
+	
+		
+		Alert ls=driver.switchTo().alert();
+		
+		ls.accept();
+
+	}
+	
+	//javascriprt
+	
+	
+	public static void jssendkeys(String data,WebElement e) {
+		
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		
+		js.executeScript("aruguments[0].setattribute('value','"+data+"')",e);
+		
+
+	}
+	
+	//frame inside
+	
+	public static  void switchintoframe(int index) {
+		
+		driver.switchTo().frame(index);
+		
+
+	}
+	
+	//frameoutside
+	
+	private void switchoutside() {
+		driver.switchTo().defaultContent();
+
+	}
+	
+	}
+-------------------------------------------------------
+Mainpage java
+
+
+
+package org.main;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.secondbase.SecondBase;
+
+public class MainPage extends SecondBase {
+	
+	
+	public static void main(String[] args) {
+		
+		chromelaunch();
+
+         driver.get("http://facebook.com");
+
+         impwait(10);
+         
+          WebElement user=driver.findElement(By.id("email"));
+          
+          user.sendKeys("kavi");
+          
+      	WebElement pass=driver.findElement(By.id("pass"));
+      	
+      	pass.sendKeys("1234");
+      	
+      	WebElement s=driver.findElement(By.id("btn"));
+      	
+      	s.click();
+
+
+      	gettiltle();
+      	
+      	quit();
+      	
+      	simplealert();
+      	
+    
+      	
+      	
+          
+          
+         
+         
+         
+        
+         
+         
+
+
+
+        
+		
+	}
+	
+	
+	
